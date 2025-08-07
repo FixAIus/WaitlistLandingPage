@@ -1,0 +1,5 @@
+# Placeholder for future Python backend dependencies
+# Example:
+# Flask==3.0.2
+
+

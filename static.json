@@ -1,1 +1,6 @@
-{\n   root: .,\n  headers: {\n    /**: { Cache-Control: max-age=3600 }\n  }\n}
+﻿{
+   root: .,
+  headers: {
+    /**: { Cache-Control: max-age=3600 }
+  }
+}
