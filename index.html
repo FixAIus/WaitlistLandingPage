@@ -3,27 +3,53 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI Agent Appointment Setter – DIY Intro Offer</title>
+    <title>AI that rizzes up your leads – IG AI Appointment Setter</title>
     <meta
       name="description"
       content="Join the waitlist for a DIY AI agent appointment setter for Instagram. Simple setup, low-cost entry, connect via API when ready."
     />
+    <!-- Fonts approximating Browserbase style -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+    <!-- 3D model-viewer web component -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
   </head>
   <body>
+    <!-- Decorative background blobs -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-blob blob-1" aria-hidden="true"></div>
+    <div class="bg-blob blob-2" aria-hidden="true"></div>
+    <div class="bg-keycaps" aria-hidden="true">
+      <span class="emoji3d e1" data-seed="0.2">📈</span>
+      <span class="emoji3d e2" data-seed="1.1">💰</span>
+      <span class="emoji3d e3" data-seed="2.3">💵</span>
+      <span class="emoji3d e4" data-seed="0.8">🤝</span>
+      <span class="emoji3d e5" data-seed="1.9">🤖</span>
+      <img class="emoji3d e6 ig" alt="Instagram" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" />
+      <!-- Bulk emojis for dense background -->
+      <span class="emoji3d bulk" style="left:5%; top:140%;" data-seed="0.4">📈</span>
+      <span class="emoji3d bulk" style="left:18%; top:155%;" data-seed="1.2">💵</span>
+      <span class="emoji3d bulk" style="right:8%; top:160%;" data-seed="2.1">💰</span>
+      <span class="emoji3d bulk" style="right:14%; top:180%;" data-seed="0.9">📈</span>
+      <span class="emoji3d bulk" style="left:12%; top:200%;" data-seed="1.6">💵</span>
+      <img class="emoji3d bulk ig" style="right:10%; top:210%;" alt="Instagram" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" />
+      <span class="emoji3d bulk" style="left:8%; top:230%;" data-seed="2.7">💰</span>
+      <span class="emoji3d bulk" style="right:6%; top:250%;" data-seed="0.7">📈</span>
+      <span class="emoji3d bulk" style="left:20%; top:270%;" data-seed="1.4">💵</span>
+    </div>
+    <!-- Side-follow 3D characters -->
+    
+    <model-viewer class="side-3d left" id="sideMonkey" src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Suzanne/glTF-Binary/Suzanne.glb" ar shadow-intensity="0.8" camera-controls disable-zoom auto-rotate autoplay interaction-prompt="none" exposure="1.0" alt="3D monkey" aria-hidden="true"></model-viewer>
     <header class="site-header">
       <div class="container header-inner">
         <div class="brand">
-          <span class="logo">AIA</span>
-          <span class="brand-text">Agent Appointments</span>
+          <span class="logo">FX</span>
+          <span class="brand-text">Fix AI</span>
         </div>
         <nav class="main-nav" aria-label="Primary">
-          <button class="nav-link active" data-tab-target="#home" aria-controls="home" aria-selected="true" role="tab">Home</button>
-          <button class="nav-link" data-tab-target="#pricing" aria-controls="pricing" aria-selected="false" role="tab">Pricing</button>
-          <button class="nav-link" data-tab-target="#how" aria-controls="how" aria-selected="false" role="tab">How it works</button>
-          <button class="nav-link" data-tab-target="#faq" aria-controls="faq" aria-selected="false" role="tab">FAQ</button>
+          <button class="nav-link" data-scroll-to="#installation">Installation</button>
+          <button class="nav-link" data-scroll-to="#usecases">Use cases</button>
+          <button class="nav-link" data-scroll-to="#pricing">Pricing</button>
         </nav>
       </div>
     </header>
@@ -32,119 +58,118 @@
       <!-- Home / VSL -->
       <section id="home" class="tab-panel active" role="tabpanel" aria-labelledby="home-tab">
         <div class="hero">
-          <h1>DIY AI Agent Appointment Setter for Instagram</h1>
-          <p class="subtitle">Low-cost intro offer. Connect via API, start booking more calls.</p>
+          <h1>AI that rizzes up your leads</h1>
+          <p class="subtitle">AI agent appointment setter for Instagram</p>
 
           <div class="cta-row">
-            <a href="#waitlist" class="btn btn-primary" data-scroll-to="#waitlist">Join waitlist</a>
-            <a href="#pricing" class="btn btn-ghost" data-tab-link="#pricing">See pricing</a>
+            <a href="#survey" class="btn btn-danger" data-scroll-to="#survey">GET YOURS NOW</a>
           </div>
         </div>
 
-        <div class="card vsl-card">
-          <h2 class="card-title">Watch the 2-minute overview</h2>
-          <div class="video-wrapper">
-            <!-- Replace VIDEO_ID with your YouTube video ID, or pass ?vsl=VIDEO_ID in the URL -->
-            <iframe
-              id="vslIframe"
-              class="video-frame"
-              src="https://www.youtube.com/embed/VIDEO_ID?rel=0&amp;modestbranding=1"
-              title="VSL – DIY AI Agent Appointment Setter"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+        <!-- Metrics image + Booked call GIF -->
+        <div id="media" class="card">
+          <h2 class="card-title">See the results</h2>
+          <div class="media-grid large-spotlight">
+            <figure class="media-item">
+              <img class="wide" id="metricsImage" alt="Metrics dashboard" loading="lazy" decoding="async" src="assets/metrics-preview.png" />
+              <figcaption class="caption muted small">Metrics preview</figcaption>
+            </figure>
+            <figure class="media-item">
+              <img class="tall" id="bookingGif" alt="Call being booked automatically" loading="lazy" decoding="async" src="assets/booked-call.gif" />
+              <figcaption class="caption muted small">Booked call demo</figcaption>
+            </figure>
           </div>
-          <p class="muted small">Tip: Add <code>?vsl=YOUR_VIDEO_ID</code> to the URL to set the video without editing code.</p>
+          <p class="muted small">You can preview your own assets by appending <code>?metrics=URL&bookgif=URL</code> to the page URL.</p>
         </div>
 
-        <div id="waitlist" class="card">
-          <h2 class="card-title">Get early access</h2>
-          <p class="muted">We’ll email you when the DIY offer opens.</p>
-          <form id="waitlistForm" class="form-grid" novalidate>
-            <label class="form-field">
-              <span>Email</span>
-              <input type="email" id="email" name="email" placeholder="you@example.com" required />
-            </label>
-            <label class="form-field">
-              <span>Instagram handle (optional)</span>
-              <input type="text" id="instagram" name="instagram" placeholder="@yourhandle" />
-            </label>
-            <button type="submit" class="btn btn-primary">Join waitlist</button>
-            <p id="waitlistMessage" class="form-message" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </section>
-
-      <!-- Pricing -->
-      <section id="pricing" class="tab-panel" role="tabpanel" aria-labelledby="pricing-tab" hidden>
-        <h2>Pricing</h2>
-        <div class="pricing-grid">
-          <div class="card pricing-card">
-            <h3 class="plan-name">DIY Intro</h3>
-            <p class="price"><span class="currency">$</span>49<span class="period">/mo</span></p>
-            <ul class="feature-list">
-              <li>Instagram DM agent (DIY setup)</li>
-              <li>Connect to our backend via API</li>
-              <li>Basic scripts and templates</li>
-              <li>Email support</li>
-            </ul>
-            <button class="btn btn-primary" data-tab-link="#home" data-scroll-to="#waitlist">Join waitlist</button>
-          </div>
-
-          <div class="card pricing-card muted-card">
-            <h3 class="plan-name">Pro (Coming soon)</h3>
-            <p class="price">Custom</p>
-            <ul class="feature-list">
-              <li>Done-for-you setup</li>
-              <li>Script optimization</li>
-              <li>CRM + calendar integrations</li>
-              <li>Priority support</li>
-            </ul>
-            <button class="btn btn-disabled" disabled>Not open yet</button>
+        <div class="card">
+          <h2 id="installation" class="card-title">Install in under 5 minutes!</h2>
+          <ol class="steps">
+            <li><strong>Make an account with us</strong></li>
+            <li><strong>Connect your Instagram</strong></li>
+            <li><strong>Modify the template prompt to your use-case</strong></li>
+            <li><strong>Connect AI agent to your account (done for you)</strong> – <span class="muted small">we handle the connection</span></li>
+            <li><strong>Book calls on autopilot!</strong></li>
+          </ol>
+          <div class="install-grid">
+            <figure class="media-item">
+              <img id="complexWorkflowGif" alt="Overly complex workflow" loading="lazy" decoding="async" src="assets/complex-workflow.png" />
+              <figcaption class="caption">❌ <span class="muted">Don't spend time building this.</span></figcaption>
+            </figure>
+            <figure class="media-item">
+              <img id="simpleInstallGif" alt="Simple 2-second install" loading="lazy" decoding="async" src="assets/simple-install.gif" />
+              <figcaption class="caption">✅ <span class="muted">just install this in 2 seconds</span></figcaption>
+            </figure>
           </div>
         </div>
-      </section>
 
-      <!-- How it works -->
-      <section id="how" class="tab-panel" role="tabpanel" aria-labelledby="how-tab" hidden>
-        <h2>How it works</h2>
-        <ol class="steps">
-          <li><strong>Join the waitlist</strong> – Get notified when access opens.</li>
-          <li><strong>Connect via API</strong> – Input your API key and Instagram account.</li>
-          <li><strong>Apply templates</strong> – Start with proven conversation flows.</li>
-          <li><strong>Go live</strong> – Your agent books appointments while you sleep.</li>
-        </ol>
-        <div class="card info">
-          <p class="muted">We’re finalizing onboarding instructions. Early users will help shape the product.</p>
+        
+
+        <div class="card" id="usecases">
+          <h2 class="card-title">More than just an appointment setter — it’s AI you responding</h2>
+          <p class="muted">Here’s all the ways you can use it:</p>
+          <ul class="feature-list bullets">
+            <li>Qualify inbound leads + set appointments</li>
+            <li>Answer FAQs</li>
+            <li>Set up dates for you</li>
+            <li>Make friendly chit chat with your friends</li>
+          </ul>
         </div>
-      </section>
 
-      <!-- FAQ -->
-      <section id="faq" class="tab-panel" role="tabpanel" aria-labelledby="faq-tab" hidden>
-        <h2>FAQ</h2>
-        <details class="faq-item">
-          <summary>When will the DIY offer be ready?</summary>
-          <p>We’re targeting a limited early-access rollout soon. Join the waitlist to be first in line.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Do I need coding experience?</summary>
-          <p>No. You’ll get copy-paste setup steps. If you can follow a checklist, you’re good.</p>
-        </details>
-        <details class="faq-item">
-          <summary>What platforms are supported?</summary>
-          <p>Instagram DMs at launch. Additional channels may follow.</p>
-        </details>
-        <details class="faq-item">
-          <summary>How does billing work?</summary>
-          <p>Monthly subscription for DIY Intro. Cancel anytime.</p>
-        </details>
+        <div id="pricing" class="card">
+          <h2 class="card-title">Pricing / What you get</h2>
+          <div class="pricing-grid tiers">
+            <article class="pricing-card tier">
+              <header class="tier-head">
+                <p class="tier-kicker">Starter</p>
+                <h3 class="plan-name">AI Setter</h3>
+                <div class="price-row">
+                  <span class="price-big">Free</span>
+                  <span class="price-note">first 500 credits (~50 responses)</span>
+                </div>
+              </header>
+              <ul class="feature-list checks">
+                <li>Pay-by-usage</li>
+                <li>1 AI agent</li>
+                <li>Prompt template</li>
+                <li>KPI Dashboard</li>
+                <li>1 Campaign</li>
+              </ul>
+              <a class="btn btn-danger btn-tier" href="#survey" data-scroll-to="#survey">Get started</a>
+            </article>
+
+            <article class="pricing-card tier highlight">
+              <header class="tier-head">
+                <p class="tier-kicker">Pro</p>
+                <h3 class="plan-name">AI Appointment Setting System</h3>
+                <div class="price-row">
+                  <span class="price-big">Custom</span>
+                </div>
+              </header>
+              <ul class="feature-list checks">
+                <li>Custom built</li>
+                <li>Multi-agent appointment setter</li>
+                <li>Custom KPI dashboard</li>
+                <li>1:1 support</li>
+                <li>Multiple simultaneous campaigns</li>
+              </ul>
+              <a class="btn btn-dark btn-tier" href="https://api.leadconnectorhq.com/widget/bookings/fixai-strategy-consultation" target="_blank" rel="noopener">Book DFY</a>
+            </article>
+          </div>
+        </div>
+
+        <div id="survey" class="card">
+          <h2 class="card-title">Get yours now</h2>
+          <!-- Contact collection survey embed -->
+          <iframe src="https://api.leadconnectorhq.com/widget/survey/9tZr3hfxdkR7WN0elENu" style="border:none;width:100%;" scrolling="no" id="9tZr3hfxdkR7WN0elENu" title="survey"></iframe>
+          <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p class="muted small">© <span id="year"></span> Agent Appointments. All rights reserved.</p>
+        <p class="muted small">© <span id="year"></span> Fix AI LLC. All rights reserved.</p>
         <div class="footer-links">
           <a href="#" aria-disabled="true">Terms</a>
           <a href="#" aria-disabled="true">Privacy</a>
