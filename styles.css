@@ -220,6 +220,11 @@ main.container { padding: 28px 0 60px; }
 .feature-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
 .bullets { list-style: disc; padding-left: 1.2rem; }
 
+/* Use-cases as standalone grid (2x2) with space around it */
+.usecases-section { margin: 18px 0 24px; }
+.feature-grid.two-col { grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 800px) { .feature-grid.two-col { grid-template-columns: 1fr; } }
+
 /* New: install comparison grid */
 .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 @media (max-width: 800px) { .install-grid { grid-template-columns: 1fr; } }
