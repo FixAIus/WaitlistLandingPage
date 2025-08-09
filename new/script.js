@@ -22,7 +22,12 @@
   tabButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = btn.getAttribute("data-tab-target");
-      activateTab(target);
+      const scrollTarget = btn.getAttribute('data-scroll-to');
+      if (scrollTarget) {
+        smoothScrollTo(scrollTarget);
+        return;
+      }
+      if (target) activateTab(target);
     });
   });
 
@@ -53,6 +58,78 @@
       iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(vslId)}?rel=0&modestbranding=1`;
     }
   }
+
+  // Demo GIF via URL param: ?gif=URL
+  const gifUrl = params.get('gif');
+  const demoImage = $('#demoImage');
+  if (demoImage) {
+    const fallback = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">
+        <defs>
+          <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0ea5e9"/>
+            <stop offset="100%" stop-color="#10b981"/>
+          </linearGradient>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#g)"/>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="28" font-family="sans-serif">Demo GIF placeholder — add ?gif=URL</text>
+      </svg>`
+    );
+    demoImage.src = gifUrl || fallback;
+  }
+
+  // New media placeholders + URL params
+  const metricsUrl = params.get('metrics');
+  const bookingGifUrl = params.get('bookgif');
+  const complexGifUrl = params.get('complex');
+  const simpleGifUrl = params.get('simple');
+
+  const metricsImage = $('#metricsImage');
+  if (metricsImage && metricsUrl) {
+    metricsImage.src = metricsUrl;
+  }
+
+  const bookingGif = $('#bookingGif');
+  if (bookingGif && bookingGifUrl) {
+    bookingGif.src = bookingGifUrl;
+  }
+
+  const complexWorkflowGif = $('#complexWorkflowGif');
+  if (complexWorkflowGif && complexGifUrl) {
+    complexWorkflowGif.src = complexGifUrl;
+  }
+
+  const simpleInstallGif = $('#simpleInstallGif');
+  if (simpleInstallGif && simpleGifUrl) {
+    simpleInstallGif.src = simpleGifUrl;
+  }
+
+  // Side-follow models parallax tilt
+  const sideMonkey = $('#sideMonkey');
+  function onScroll() {
+    const y = window.scrollY || 0;
+    const monkey = Math.cos(y / 280) * 14;
+    if (sideMonkey) sideMonkey.style.transform = `translateY(${monkey}px) rotate(${monkey/40}deg)`;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // (Removed chat demo logic)
+
+  // Animate floating 3D emojis for parallax pop
+  const emojiEls = $$('.emoji3d');
+  function onScrollEmojis() {
+    const y = window.scrollY || 0;
+    emojiEls.forEach((el) => {
+      const seed = parseFloat(el.getAttribute('data-seed') || '1');
+      // Keep general position but add subtle perspective shift
+      const tilt = Math.sin((y / 600) + seed) * 6;
+      const depth = Math.cos((y / 700) + seed) * 10;
+      el.style.transform = `rotateX(${tilt}deg) rotateY(${tilt/2}deg) translateZ(${depth}px)`;
+    });
+  }
+  window.addEventListener('scroll', onScrollEmojis, { passive: true });
+  onScrollEmojis();
 
   // Footer year
   const yearEl = $("#year");
