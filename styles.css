@@ -117,6 +117,18 @@ main.container { padding: 28px 0 60px; }
   transform: translateY(-1px);
 }
 
+/* Hero CTA: red gradient pill like the screenshot */
+.btn-cta-red {
+  color: #0b1220;
+  background: linear-gradient(135deg, #fed7d7 0%, #fca5a5 35%, #fb7185 70%, #ef4444 100%);
+  border: 1px solid rgba(13, 27, 42, 0.12);
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.25), 0 6px 14px rgba(239, 68, 68, 0.18);
+  text-decoration: underline;
+}
+.btn-cta-red:hover { filter: saturate(1.06); transform: translateY(-1px); }
+
+.btn-hero { padding: 14px 20px; border-radius: 16px; font-size: 1.1rem; }
+
 /* playful hover wiggle */
 .btn-danger:hover { transform: translateY(-1px) rotate(-0.3deg); transition: transform 120ms ease; }
 .btn:active { transform: translateY(0); }
