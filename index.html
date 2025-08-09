@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Agent Appointment Setter – DIY Intro Offer</title>
+    <meta
+      name="description"
+      content="Join the waitlist for a DIY AI agent appointment setter for Instagram. Simple setup, low-cost entry, connect via API when ready."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <span class="logo">AIA</span>
+          <span class="brand-text">Agent Appointments</span>
+        </div>
+        <nav class="main-nav" aria-label="Primary">
+          <button class="nav-link active" data-tab-target="#home" aria-controls="home" aria-selected="true" role="tab">Home</button>
+          <button class="nav-link" data-tab-target="#pricing" aria-controls="pricing" aria-selected="false" role="tab">Pricing</button>
+          <button class="nav-link" data-tab-target="#how" aria-controls="how" aria-selected="false" role="tab">How it works</button>
+          <button class="nav-link" data-tab-target="#faq" aria-controls="faq" aria-selected="false" role="tab">FAQ</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Home / VSL -->
+      <section id="home" class="tab-panel active" role="tabpanel" aria-labelledby="home-tab">
+        <div class="hero">
+          <h1>DIY AI Agent Appointment Setter for Instagram</h1>
+          <p class="subtitle">Low-cost intro offer. Connect via API, start booking more calls.</p>
+
+          <div class="cta-row">
+            <a href="#waitlist" class="btn btn-primary" data-scroll-to="#waitlist">Join waitlist</a>
+            <a href="#pricing" class="btn btn-ghost" data-tab-link="#pricing">See pricing</a>
+          </div>
+        </div>
+
+        <div class="card vsl-card">
+          <h2 class="card-title">Watch the 2-minute overview</h2>
+          <div class="video-wrapper">
+            <!-- Replace VIDEO_ID with your YouTube video ID, or pass ?vsl=VIDEO_ID in the URL -->
+            <iframe
+              id="vslIframe"
+              class="video-frame"
+              src="https://www.youtube.com/embed/VIDEO_ID?rel=0&amp;modestbranding=1"
+              title="VSL – DIY AI Agent Appointment Setter"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="muted small">Tip: Add <code>?vsl=YOUR_VIDEO_ID</code> to the URL to set the video without editing code.</p>
+        </div>
+
+        <div id="waitlist" class="card">
+          <h2 class="card-title">Get early access</h2>
+          <p class="muted">We’ll email you when the DIY offer opens.</p>
+          <form id="waitlistForm" class="form-grid" novalidate>
+            <label class="form-field">
+              <span>Email</span>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label class="form-field">
+              <span>Instagram handle (optional)</span>
+              <input type="text" id="instagram" name="instagram" placeholder="@yourhandle" />
+            </label>
+            <button type="submit" class="btn btn-primary">Join waitlist</button>
+            <p id="waitlistMessage" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing" class="tab-panel" role="tabpanel" aria-labelledby="pricing-tab" hidden>
+        <h2>Pricing</h2>
+        <div class="pricing-grid">
+          <div class="card pricing-card">
+            <h3 class="plan-name">DIY Intro</h3>
+            <p class="price"><span class="currency">$</span>49<span class="period">/mo</span></p>
+            <ul class="feature-list">
+              <li>Instagram DM agent (DIY setup)</li>
+              <li>Connect to our backend via API</li>
+              <li>Basic scripts and templates</li>
+              <li>Email support</li>
+            </ul>
+            <button class="btn btn-primary" data-tab-link="#home" data-scroll-to="#waitlist">Join waitlist</button>
+          </div>
+
+          <div class="card pricing-card muted-card">
+            <h3 class="plan-name">Pro (Coming soon)</h3>
+            <p class="price">Custom</p>
+            <ul class="feature-list">
+              <li>Done-for-you setup</li>
+              <li>Script optimization</li>
+              <li>CRM + calendar integrations</li>
+              <li>Priority support</li>
+            </ul>
+            <button class="btn btn-disabled" disabled>Not open yet</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section id="how" class="tab-panel" role="tabpanel" aria-labelledby="how-tab" hidden>
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li><strong>Join the waitlist</strong> – Get notified when access opens.</li>
+          <li><strong>Connect via API</strong> – Input your API key and Instagram account.</li>
+          <li><strong>Apply templates</strong> – Start with proven conversation flows.</li>
+          <li><strong>Go live</strong> – Your agent books appointments while you sleep.</li>
+        </ol>
+        <div class="card info">
+          <p class="muted">We’re finalizing onboarding instructions. Early users will help shape the product.</p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="tab-panel" role="tabpanel" aria-labelledby="faq-tab" hidden>
+        <h2>FAQ</h2>
+        <details class="faq-item">
+          <summary>When will the DIY offer be ready?</summary>
+          <p>We’re targeting a limited early-access rollout soon. Join the waitlist to be first in line.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need coding experience?</summary>
+          <p>No. You’ll get copy-paste setup steps. If you can follow a checklist, you’re good.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What platforms are supported?</summary>
+          <p>Instagram DMs at launch. Additional channels may follow.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does billing work?</summary>
+          <p>Monthly subscription for DIY Intro. Cancel anytime.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="muted small">© <span id="year"></span> Agent Appointments. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#" aria-disabled="true">Terms</a>
+          <a href="#" aria-disabled="true">Privacy</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+
