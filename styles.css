@@ -105,6 +105,18 @@ main.container { padding: 28px 0 60px; }
 .btn-danger { background: #ef4444; color: #fff; }
 .btn-danger:hover { background: #dc2626; }
 
+/* New: gradient CTA to match pricing screenshot */
+.btn-cta {
+  color: #0b1220;
+  background: linear-gradient(135deg, #a7f3d0 0%, #67e8f9 30%, #38bdf8 100%);
+  border: 1px solid rgba(13, 27, 42, 0.12);
+  box-shadow: 0 12px 28px rgba(56, 189, 248, 0.25), 0 6px 14px rgba(56, 189, 248, 0.18);
+}
+.btn-cta:hover {
+  filter: saturate(1.05);
+  transform: translateY(-1px);
+}
+
 /* playful hover wiggle */
 .btn-danger:hover { transform: translateY(-1px) rotate(-0.3deg); transition: transform 120ms ease; }
 .btn:active { transform: translateY(0); }
@@ -166,17 +178,36 @@ main.container { padding: 28px 0 60px; }
 .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 @media (max-width: 860px) { .pricing-grid { grid-template-columns: 1fr; } }
 .pricing-grid.tiers { gap: 20px; }
-.pricing-card.tier { text-align: left; padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.75); border: 1px solid var(--card-border); box-shadow: 0 20px 45px rgba(0,0,0,0.08); backdrop-filter: blur(8px); }
+.pricing-card.tier { text-align: left; padding: 22px; border-radius: 20px; background: rgba(255,255,255,0.78); border: 1px solid var(--card-border); box-shadow: 0 20px 45px rgba(0,0,0,0.08); backdrop-filter: blur(10px); display: flex; flex-direction: column; }
 .pricing-card.tier.highlight { background: rgba(255,255,255,0.85); box-shadow: 0 24px 60px rgba(0,0,0,0.12); }
 .tier-head { margin-bottom: 10px; }
 .tier-kicker { margin: 0 0 6px; color: var(--muted); font-weight: 600; letter-spacing: 0.2px; }
-.plan-name { margin: 0 0 6px; font-size: 1.4rem; font-weight: 800; font-family: "Space Grotesk", Inter, sans-serif; }
-.price-row { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 12px; }
-.price-big { font-size: 2rem; font-weight: 900; }
+.plan-name { margin: 0 0 6px; font-size: 1.6rem; font-weight: 800; font-family: "Space Grotesk", Inter, sans-serif; letter-spacing: -0.01em; }
+.price-row { display: flex; align-items: baseline; gap: 12px; margin: 8px 0 14px; }
+.price-big { font-size: 2.6rem; font-weight: 900; letter-spacing: -0.02em; }
 .price-note { color: var(--muted); font-size: 0.95rem; }
-.feature-list { list-style: none; padding: 0; margin: 10px 0 16px; display: grid; gap: 8px; }
-.feature-list.checks li::before { content: "✓"; color: #10b981; font-weight: 900; margin-right: 8px; }
+.feature-list { list-style: none; padding: 0; margin: 10px 0 16px; display: grid; gap: 10px; flex: 1; }
+/* Check items styled as round check badges */
+.feature-list.checks li {
+  display: flex;
+  align-items: center;
+}
+.feature-list.checks li::before {
+  content: "✓";
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--card-border);
+  color: #10b981;
+  font-weight: 900;
+  line-height: 1;
+}
 .btn-tier { width: 100%; }
+.btn-tier { padding: 12px 16px; border-radius: 12px; font-size: 1.05rem; }
 .btn-dark { background: #111827; color: #fff; }
 
 .steps { line-height: 1.7; }
