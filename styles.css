@@ -225,6 +225,15 @@ main.container { padding: 28px 0 60px; }
 .feature-grid.two-col { grid-template-columns: 1fr 1fr; gap: 18px; }
 @media (max-width: 800px) { .feature-grid.two-col { grid-template-columns: 1fr; } }
 
+/* Make feature cards look free-floating with stronger shadow and spacing */
+.feature-item.free {
+  background: rgba(255,255,255,0.75);
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+  padding: 18px;
+}
+
 /* New: install comparison grid */
 .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 @media (max-width: 800px) { .install-grid { grid-template-columns: 1fr; } }
