@@ -234,6 +234,17 @@ main.container { padding: 28px 0 60px; }
   padding: 18px;
 }
 
+/* Bigger, easier-to-read typography for use-cases */
+.feature-item.free h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; }
+.feature-item.free p { font-size: 1.06rem; line-height: 1.65; font-weight: 500; }
+
+/* Larger captions under images */
+.caption { font-size: 1.25rem; font-weight: 700; }
+
+/* Enlarge install images by ~33% while keeping rounded frame */
+.install-grid .media-item { overflow: hidden; }
+.install-grid .media-item img { transform: scale(1.33); transform-origin: center; }
+
 /* New: install comparison grid */
 .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 @media (max-width: 800px) { .install-grid { grid-template-columns: 1fr; } }
