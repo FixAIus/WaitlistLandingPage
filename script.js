@@ -136,7 +136,9 @@
   function resizeEmojiField() {
     if (!bgKeycaps || !footer) return;
     const footerTopDoc = footer.getBoundingClientRect().top + window.scrollY;
-    bgKeycaps.style.height = `${footerTopDoc}px`;
+    const docTop = 0;
+    const maxHeight = Math.max(0, footerTopDoc - docTop);
+    bgKeycaps.style.height = `${maxHeight}px`;
   }
   window.addEventListener('load', resizeEmojiField);
   window.addEventListener('resize', resizeEmojiField);
