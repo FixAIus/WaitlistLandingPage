@@ -116,20 +116,19 @@
 
   // (Removed chat demo logic)
 
-  // Animate floating 3D emojis for parallax pop
+  // Give emojis subtle depth without following scroll position
   const emojiEls = $$('.emoji3d');
-  function onScrollEmojis() {
-    const y = window.scrollY || 0;
+  function animateEmojis() {
+    const t = performance.now() / 1000;
     emojiEls.forEach((el) => {
       const seed = parseFloat(el.getAttribute('data-seed') || '1');
-      // Keep general position but add subtle perspective shift
-      const tilt = Math.sin((y / 600) + seed) * 6;
-      const depth = Math.cos((y / 700) + seed) * 10;
-      el.style.transform = `rotateX(${tilt}deg) rotateY(${tilt/2}deg) translateZ(${depth}px)`;
+      const tilt = Math.sin(t + seed) * 4;
+      const bob = Math.cos(t * 0.7 + seed) * 6;
+      el.style.transform = `translateY(${bob}px) rotate(${tilt}deg)`;
     });
+    requestAnimationFrame(animateEmojis);
   }
-  window.addEventListener('scroll', onScrollEmojis, { passive: true });
-  onScrollEmojis();
+  animateEmojis();
 
   // Footer year
   const yearEl = $("#year");
