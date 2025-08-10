@@ -34,10 +34,23 @@
   // Mobile nav toggle
   const navToggle = document.getElementById('navToggle');
   const navItems = document.querySelector('.main-nav .nav-items');
+  const navClose = document.getElementById('navClose');
+  const navBackdrop = document.getElementById('navBackdrop');
   if (navToggle && navItems) {
     navToggle.addEventListener('click', () => {
       const isOpen = navItems.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', String(isOpen));
+      if (navBackdrop) navBackdrop.style.display = isOpen ? 'block' : 'none';
+    });
+    if (navClose) navClose.addEventListener('click', () => {
+      navItems.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      if (navBackdrop) navBackdrop.style.display = 'none';
+    });
+    if (navBackdrop) navBackdrop.addEventListener('click', () => {
+      navItems.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navBackdrop.style.display = 'none';
     });
     // Close when clicking a nav item
     navItems.addEventListener('click', (e) => {
@@ -45,6 +58,7 @@
       if (target instanceof HTMLElement && (target.matches('.nav-link') || target.matches('.btn'))) {
         navItems.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
+        if (navBackdrop) navBackdrop.style.display = 'none';
       }
     });
   }
