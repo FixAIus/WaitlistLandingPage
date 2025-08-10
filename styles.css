@@ -34,8 +34,10 @@ body {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
   backdrop-filter: saturate(1.1) blur(8px);
   background: linear-gradient(135deg, color-mix(in srgb, var(--bg-1), white 20%), color-mix(in srgb, var(--bg-2), white 20%));
@@ -79,7 +81,7 @@ body {
 .nav-link:hover { border-color: var(--card-border); }
 .nav-link.active { background: white; border-color: var(--card-border); box-shadow: var(--shadow); }
 
-main.container { padding: 28px 0 60px; }
+main.container { padding: 88px 0 60px; }
 
 .hero { text-align: center; margin: 20px 0 26px; position: relative; }
 .hero h1 { margin: 0 0 10px; font-size: clamp(32px, 6vw, 72px); line-height: 1.02; font-family: "Space Grotesk", Inter, sans-serif; letter-spacing: -0.02em; }
@@ -304,7 +306,6 @@ main.container { padding: 28px 0 60px; }
   top: 0;
   left: 0;
   right: 0;
-  height: 400vh; /* spans multiple viewports so new emojis appear as you scroll */
   pointer-events: none;
   z-index: -1;
 }

@@ -118,6 +118,8 @@
 
   // Give emojis subtle depth without following scroll position
   const emojiEls = $$('.emoji3d');
+  // Stop emojis after the footer so they don't extend infinitely
+  const footer = document.getElementById('footer');
   function animateEmojis() {
     const t = performance.now() / 1000;
     emojiEls.forEach((el) => {
@@ -126,7 +128,9 @@
       const bob = Math.cos(t * 0.7 + seed) * 6;
       el.style.transform = `translateY(${bob}px) rotate(${tilt}deg)`;
     });
-    requestAnimationFrame(animateEmojis);
+    // Only continue animating while footer is not fully past viewport bottom
+    const footerTop = footer ? footer.getBoundingClientRect().top : 1;
+    if (footerTop > 0) requestAnimationFrame(animateEmojis);
   }
   animateEmojis();
 
