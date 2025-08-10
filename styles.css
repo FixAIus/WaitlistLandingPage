@@ -59,6 +59,7 @@ body {
   color: white;
   font-weight: 800;
 }
+.logo-img { width: 36px; height: 36px; border-radius: 10px; display: block; object-fit: cover; }
 .brand-text { font-weight: 700; letter-spacing: -0.01em; font-family: "Space Grotesk", Inter, sans-serif; font-size: 26px; }
 /* Brand uses Space Grotesk per request */
 .brand-text { font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; letter-spacing: -0.01em; }
@@ -120,14 +121,14 @@ main.container { padding: 28px 0 60px; }
 /* Hero CTA: red gradient pill like the screenshot */
 .btn-cta-red {
   color: #0b1220;
-  background: linear-gradient(135deg, #fed7d7 0%, #fca5a5 35%, #fb7185 70%, #ef4444 100%);
+  background: linear-gradient(135deg, #fecaca 0%, #f87171 35%, #ef4444 65%, #dc2626 85%, #b91c1c 100%);
   border: 1px solid rgba(13, 27, 42, 0.12);
-  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.25), 0 6px 14px rgba(239, 68, 68, 0.18);
-  text-decoration: underline;
+  box-shadow: 0 12px 28px rgba(220, 38, 38, 0.28), 0 6px 14px rgba(220, 38, 38, 0.2);
+  text-decoration: none;
 }
 .btn-cta-red:hover { filter: saturate(1.06); transform: translateY(-1px); }
 
-.btn-hero { padding: 14px 20px; border-radius: 16px; font-size: 1.1rem; }
+.btn-hero { padding: 14px 20px; border-radius: 16px; font-size: calc(1.1rem + 4px); }
 
 /* playful hover wiggle */
 .btn-danger:hover { transform: translateY(-1px) rotate(-0.3deg); transition: transform 120ms ease; }
