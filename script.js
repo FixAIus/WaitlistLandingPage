@@ -31,6 +31,24 @@
     });
   });
 
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navItems = document.querySelector('.main-nav .nav-items');
+  if (navToggle && navItems) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navItems.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    // Close when clicking a nav item
+    navItems.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target instanceof HTMLElement && (target.matches('.nav-link') || target.matches('.btn'))) {
+        navItems.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Allow links to switch tabs via data-tab-link
   $$('[data-tab-link]').forEach((el) => {
     el.addEventListener('click', (e) => {
