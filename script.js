@@ -34,24 +34,15 @@
   // Mobile nav toggle
   const navToggle = document.getElementById('navToggle');
   const navItems = document.querySelector('.main-nav .nav-items');
-  const navClose = document.getElementById('navClose');
-  const navBackdrop = document.getElementById('navBackdrop');
+  const navClose = null; // removed X button
+  const navBackdrop = null; // removed backdrop
   if (navToggle && navItems) {
     navToggle.addEventListener('click', () => {
       const isOpen = navItems.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', String(isOpen));
-      if (navBackdrop) navBackdrop.style.display = isOpen ? 'block' : 'none';
+      // no backdrop
     });
-    if (navClose) navClose.addEventListener('click', () => {
-      navItems.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      if (navBackdrop) navBackdrop.style.display = 'none';
-    });
-    if (navBackdrop) navBackdrop.addEventListener('click', () => {
-      navItems.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      navBackdrop.style.display = 'none';
-    });
+    // no X button or backdrop handlers
     // Close when clicking a nav item
     navItems.addEventListener('click', (e) => {
       const target = e.target;
