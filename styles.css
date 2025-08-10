@@ -306,6 +306,8 @@ main.container { padding: 88px 0 60px; }
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
+  height: 300vh; /* extend across scroll to reveal new emojis */
   pointer-events: none;
   z-index: -1;
 }

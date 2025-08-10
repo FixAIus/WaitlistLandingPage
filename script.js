@@ -118,8 +118,9 @@
 
   // Give emojis subtle depth without following scroll position
   const emojiEls = $$('.emoji3d');
-  // Stop emojis after the footer so they don't extend infinitely
+  // Constrain emoji container height to the footer bottom so emojis stop at page end
   const footer = document.getElementById('footer');
+  const bgKeycaps = document.querySelector('.bg-keycaps');
   function animateEmojis() {
     const t = performance.now() / 1000;
     emojiEls.forEach((el) => {
@@ -128,11 +129,19 @@
       const bob = Math.cos(t * 0.7 + seed) * 6;
       el.style.transform = `translateY(${bob}px) rotate(${tilt}deg)`;
     });
-    // Only continue animating while footer is not fully past viewport bottom
-    const footerTop = footer ? footer.getBoundingClientRect().top : 1;
-    if (footerTop > 0) requestAnimationFrame(animateEmojis);
+    requestAnimationFrame(animateEmojis);
   }
   animateEmojis();
+
+  function resizeEmojiField() {
+    if (!bgKeycaps || !footer) return;
+    const footerTopDoc = footer.getBoundingClientRect().top + window.scrollY;
+    bgKeycaps.style.height = `${footerTopDoc}px`;
+  }
+  window.addEventListener('load', resizeEmojiField);
+  window.addEventListener('resize', resizeEmojiField);
+  window.addEventListener('scroll', resizeEmojiField, { passive: true });
+  resizeEmojiField();
 
   // Footer year
   const yearEl = $("#year");
