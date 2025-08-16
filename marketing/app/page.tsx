@@ -3,29 +3,49 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import React from 'react';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import WaitlistForm from '@/components/waitlist-form';
 
 
 export default function Home() {
   const [currentYear, setCurrentYear] = useState('');
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    full_name: '',
-    email: '',
-    instagram_username: '',
-    interest_reason: '',
-    planned_usage: '',
-    business_instagram: ''
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   });
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear().toString());
+  }, []);
+
+  useEffect(() => {
+    const targetDate = new Date('2025-08-25T00:00:00').getTime();
+    
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        setCountdown({ days, hours, minutes, seconds });
+      } else {
+        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+    
+    // Update immediately
+    updateCountdown();
+    
+    // Update every second
+    const timer = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(timer);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -46,62 +66,51 @@ export default function Home() {
     setIsNavOpen(false);
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const handleNext = () => {
-    if (formData.full_name && formData.email && formData.instagram_username) {
-      setCurrentStep(2);
-    }
-  };
-
-  const handleBack = () => {
-    setCurrentStep(1);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
-
-    try {
-      const response = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitMessage('Success! You\'ve been added to the waitlist.');
-        setFormData({
-          full_name: '',
-          email: '',
-          instagram_username: '',
-          interest_reason: '',
-          planned_usage: '',
-          business_instagram: ''
-        });
-        setCurrentStep(1);
-      } else {
-        const errorData = await response.json();
-        setSubmitMessage(`Error: ${errorData.error || 'Something went wrong'}`);
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitMessage('Error: Failed to submit form');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <>
+      {/* Sticky countdown bar */}
+      <div className="fixed top-0 left-0 right-0 z-[1001] bg-red-500 text-white py-2 sm:py-3 px-4 shadow-lg">
+        <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3">
+          <div className="text-center sm:text-left">
+            <h2 className="text-lg sm:text-xl font-bold flex gap-2 justify-center sm:justify-start">
+              <span>🚀</span> 
+              <span className="hidden xs:inline">CLAIM EARLY ACCESS NOW</span>
+              <span className="xs:hidden">EARLY ACCESS</span>
+            </h2>
+            <p className="text-sm sm:text-base opacity-90 hidden sm:block">Limited time offer - Don&apos;t miss out!</p>
+          </div>
+          <div className="flex items-center gap-2 sm:gap-4 text-center">
+            <div className="flex flex-col items-center">
+              <span className="text-lg sm:text-2xl font-bold bg-white/20 rounded-lg px-2 sm:px-3 py-1 min-w-[50px] sm:min-w-[60px]">
+                {countdown.days.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs font-semibold opacity-80">DAYS</span>
+            </div>
+            <span className="text-lg sm:text-xl font-bold">:</span>
+            <div className="flex flex-col items-center">
+              <span className="text-lg sm:text-2xl font-bold bg-white/20 rounded-lg px-2 sm:px-3 py-1 min-w-[50px] sm:min-w-[60px]">
+                {countdown.hours.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs font-semibold opacity-80">HOURS</span>
+            </div>
+            <span className="text-lg sm:text-xl font-bold">:</span>
+            <div className="flex flex-col items-center">
+              <span className="text-lg sm:text-2xl font-bold bg-white/20 rounded-lg px-2 sm:px-3 py-1 min-w-[50px] sm:min-w-[60px]">
+                {countdown.minutes.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs font-semibold opacity-80">MINS</span>
+            </div>
+            <span className="text-lg sm:text-xl font-bold">:</span>
+            <div className="flex flex-col items-center">
+              <span className="text-lg sm:text-2xl font-bold bg-white/20 rounded-lg px-2 sm:px-3 py-1 min-w-[50px] sm:min-w-[60px]">
+                {countdown.seconds.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs font-semibold opacity-80">SECS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Decorative background blobs */}
       {/* <div className="fixed inset-0 bg-[url('data:image/svg+xml,%3Csvg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.02"%3E%3Cpath d="M0 0h1v50H0z"/%3E%3Cpath d="M0 0h50v1H0z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] z-[-2]" aria-hidden="true"></div> */}
       <div className="fixed w-[400px] h-[400px] rounded-full bg-pink-400 blur-[80px] opacity-10 -top-[200px] -right-[200px] z-[-1]" aria-hidden="true"></div>
@@ -141,7 +150,8 @@ export default function Home() {
         aria-hidden="true"
       /> */}
 
-      <header className="fixed top-0 left-0 px-4 xl:px-0 right-0 z-[1000] backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
+
+      <header className="fixed top-[80px] sm:top-[72px] left-0 px-4 xl:px-0 right-0 z-[1000] backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
         <div className="max-w-[1100px] mx-auto">
           <div className="flex items-center justify-between py-[18px]">
             <div className="flex items-center gap-3">
@@ -196,7 +206,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="max-w-[1100px] mx-auto pt-[80px] pb-12 px-4 xl:px-0">
+      <main className="max-w-[1100px] mx-auto pt-[168px] sm:pt-[160px] pb-0 px-4 xl:px-0">
         {/* Home / VSL */}
         <section id="home" className="tab-panel active" role="tabpanel" aria-labelledby="home-tab">
           <div className="text-center py-8">
@@ -292,6 +302,11 @@ export default function Home() {
                <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>Priority support for 6 months</strong></li>
                <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>Access to newest use-case templates</strong></li>
             </ul>
+            <div className='flex flex-col gap-1'>
+
+              <h2 className='font-semibold text-3xl'>🔥🔥BONUS🔥🔥</h2>
+              <h2 className='font-semibold text-2xl'>Refer 4 friends and get ADDITIONAL 500 MESSAGES ($50 value → FREE)</h2>
+            </div>
             {/* <div className="grid grid-cols-1 gap-8 my-8 md:grid-cols-2">
               <figure className="relative">
                 <Image 
@@ -375,7 +390,7 @@ export default function Home() {
                   <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">1 Campaign</li>
                 </ul>
                 <button 
-                  className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black font-bold text-lg rounded-lg transition-all duration-300 hover:bg-[#0284c7] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
+                  className="cursor-pointer inline-flex items-center justify-center px-6 py-3 bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black font-bold text-lg rounded-lg transition-all duration-300 hover:bg-[#0284c7] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
                   onClick={() => scrollToSection('survey')}
                 >
                   Get started
@@ -420,128 +435,7 @@ export default function Home() {
             ></iframe> */}
 
             <div className="w-full md:w-8/10 m-auto">
-              <form onSubmit={handleSubmit} className="grid gap-4">
-                {/* Step 1 */}
-                {currentStep === 1 && (
-                  <>
-                    <div className="grid gap-3">
-                      <Label htmlFor="full_name">Full Name <span className="text-red-500">*</span></Label>
-                      <Input 
-                        id="full_name" 
-                        name="full_name" 
-                        value={formData.full_name}
-                        onChange={(e) => handleInputChange('full_name', e.target.value)}
-                        required
-                      />
-                    </div>
-                    
-                    <div className="grid gap-3">
-                      <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
-                      <Input 
-                        id="email" 
-                        name="email" 
-                        type="email" 
-                        value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        required 
-                      />
-                    </div>
-                
-                    <div className="grid gap-3">
-                      <Label htmlFor="instagram_username">Instagram username <span className="text-red-500">*</span></Label>
-                      <Input 
-                        id="instagram_username" 
-                        name="instagram_username" 
-                        placeholder="@ismaeljimenez.ai"
-                        value={formData.instagram_username}
-                        onChange={(e) => handleInputChange('instagram_username', e.target.value)}
-                        required
-                      />
-                    </div>
-
-                    <Button 
-                      type="button" 
-                      onClick={handleNext}
-                      disabled={!formData.full_name || !formData.email || !formData.instagram_username}
-                      className="w-full font-bold text-base h-auto bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black hover:from-emerald-300 hover:via-cyan-400 hover:to-sky-500"
-                    >
-                      Next
-                    </Button>
-                  </>
-                )}
-
-                {/* Step 2 */}
-                {currentStep === 2 && (
-                  <>
-                    <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                      <p className="text-blue-800 text-sm">
-                        <strong>Step 2 of 2:</strong> Almost there! Just a few more questions to help us understand your needs better.
-                      </p>
-                    </div>
-
-                    <div className="grid gap-3">
-                      <Label htmlFor="interest_reason">What makes you interested in an AI appointment setter?</Label>
-                      <Textarea
-                        id="interest_reason" 
-                        name="interest_reason" 
-                        placeholder="Type your message here"
-                        value={formData.interest_reason}
-                        onChange={(e) => handleInputChange('interest_reason', e.target.value)}
-                      />
-                    </div>
-
-                    <div className="grid gap-3">
-                      <Label htmlFor="planned_usage">What do you plan on using it for?</Label>
-                      <Textarea 
-                        id="planned_usage" 
-                        name="planned_usage" 
-                        placeholder="Type your message here"
-                        value={formData.planned_usage}
-                        onChange={(e) => handleInputChange('planned_usage', e.target.value)}
-                      />
-                    </div>
-
-                    <div className="grid gap-3">
-                      <Label htmlFor="business_instagram">Do you run a business and post content on Instagram?</Label>
-                      <Textarea 
-                        id="business_instagram" 
-                        name="business_instagram" 
-                        placeholder="Type your message here"
-                        value={formData.business_instagram}
-                        onChange={(e) => handleInputChange('business_instagram', e.target.value)}
-                      />
-                    </div>
-
-                    <div className="flex gap-3">
-                      <Button 
-                        type="button" 
-                        onClick={handleBack}
-                        variant="outline"
-                        className="flex-1 font-bold text-base h-auto"
-                      >
-                        Back
-                      </Button>
-                      <Button 
-                        type="submit" 
-                        className="flex-1 font-bold text-base h-auto bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black hover:from-emerald-300 hover:via-cyan-400 hover:to-sky-500" 
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? 'Submitting...' : 'Submit'}
-                      </Button>
-                    </div>
-                  </>
-                )}
-
-                {submitMessage && (
-                  <div className={`text-center p-3 rounded-lg ${
-                    submitMessage.includes('Success') 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-red-100 text-red-800'
-                  }`}>
-                    {submitMessage}
-                  </div>
-                )}
-              </form>
+              <WaitlistForm />
             </div>
           </div>
         </section>
