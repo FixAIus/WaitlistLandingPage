@@ -25,8 +25,8 @@ model Waitlist {
   updatedAt          DateTime  @updatedAt
 }
 
-model Users {
-  id                String   @id @default(uuid())
+model Clients {
+  id                String   @id
   clerk_id          String?  @unique
   createdAt         DateTime @default(now())
   email             String   @unique
@@ -34,5 +34,5 @@ model Users {
   full_name         String?
   last_name         String?
   profile_image_url String?
-  updatedAt         DateTime @updatedAt
+  updatedAt         DateTime
 }

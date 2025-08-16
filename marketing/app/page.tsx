@@ -20,6 +20,7 @@ export default function Home() {
     planned_usage: '',
     business_instagram: ''
   });
+  const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
@@ -52,6 +53,16 @@ export default function Home() {
     }));
   };
 
+  const handleNext = () => {
+    if (formData.full_name && formData.email && formData.instagram_username) {
+      setCurrentStep(2);
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentStep(1);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -76,6 +87,7 @@ export default function Home() {
           planned_usage: '',
           business_instagram: ''
         });
+        setCurrentStep(1);
       } else {
         const errorData = await response.json();
         setSubmitMessage(`Error: ${errorData.error || 'Something went wrong'}`);
@@ -129,7 +141,7 @@ export default function Home() {
         aria-hidden="true"
       /> */}
 
-      <header className="fixed top-0 left-0 right-0 z-[1000] backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
+      <header className="fixed top-0 left-0 px-4 xl:px-0 right-0 z-[1000] backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
         <div className="max-w-[1100px] mx-auto">
           <div className="flex items-center justify-between py-[18px]">
             <div className="flex items-center gap-3">
@@ -184,12 +196,12 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="max-w-[1100px] mx-auto pt-[80px] pb-12">
+      <main className="max-w-[1100px] mx-auto pt-[80px] pb-12 px-4 xl:px-0">
         {/* Home / VSL */}
         <section id="home" className="tab-panel active" role="tabpanel" aria-labelledby="home-tab">
           <div className="text-center py-8">
-            <h1 className="text-5xl md:text-7xl mb-4 bg-gradient-to-r from-[#0ea5e9] font-['Space_Grotesk'] font-bold to-[#a78bfa] bg-clip-text tracking-tight text-neutral-900">AI that rizzes up your leads</h1>
-            <p className="text-2xl md:text-2xl text-[#4a5568] mb-4 font-semibold">Instagram DM AI agent</p>
+            <h1 className="text-5xl md:text-7xl mb-6 bg-gradient-to-r from-[#0ea5e9] font-['Space_Grotesk'] font-bold to-[#a78bfa] bg-clip-text tracking-tight text-neutral-900">AI that maximizes engagement in your DMs</h1>
+            <p className="text-2xl md:text-2xl text-[#4a5568] mb-6 font-semibold">Instagram DM AI Agent for creators, businesses, & personal use</p>
 
             <div className="flex justify-center gap-6 flex-wrap">
               <button 
@@ -273,25 +285,67 @@ export default function Home() {
             </div>
           </div>
 
+          <div className="bg-white/70 backdrop-blur-md rounded-2xl p-12 my-12 shadow-lg border border-[rgba(13,27,42,0.08)]">
+            <h2 id="early-access" className="text-center text-4xl md:text-3xl font-bold mb-8 text-[#0d1b2a]">Early Access Perks</h2>
+            <ul className="list-none my-8">
+                <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>First 500 messages free ($50) value</strong></li>
+               <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>Priority support for 6 months</strong></li>
+               <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>Access to newest use-case templates</strong></li>
+            </ul>
+            {/* <div className="grid grid-cols-1 gap-8 my-8 md:grid-cols-2">
+              <figure className="relative">
+                <Image 
+                  id="complexWorkflowGif" 
+                  alt="Overly complex workflow" 
+                  loading="lazy" 
+                  decoding="async" 
+                  src="/assets/complex-workflow.png"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+                <figcaption className="text-center mt-2">❌ <span className="text-[#4a5568] font-semibold">Don&apos;t spend time building this.</span></figcaption>
+              </figure>
+              <figure className="relative">
+                <Image 
+                  id="simpleInstallGif" 
+                  alt="Simple 2-second install" 
+                  loading="lazy" 
+                  decoding="async" 
+                  src="/assets/simple-install.gif"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+                <figcaption className="text-center mt-2">✅ <span className="text-[#4a5568] font-semibold">just install this in 2 seconds</span></figcaption>
+              </figure>
+            </div> */}
+          </div>
+
           <section id="usecases" className="my-12">
             <h2 className="text-center text-4xl md:text-3xl font-bold mb-8 text-[#0d1b2a]">More than just an appointment setter, it&apos;s AI YOU</h2>
             <p className="text-center text-[#4a5568] mb-8">Here&apos;s some of the ways you can use it:</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 my-8">
               <div className="bg-white/40 backdrop-blur-md p-6 rounded-lg border-l-4 border-[#0ea5e9]">
                 <h3 className="text-2xl font-bold mb-2 text-[#0d1b2a]">Qualify Inbound Leads + Set Sales Calls</h3>
-                <p className="text-[#4a5568]">Talk to all your leads 24/7 and and only book calls with qualified prospects.</p>
+                <p className="text-[#4a5568]">Respond to any inbound message within minutes, 24/7 and only book calls with qualified prospects.</p>
               </div>
               <div className="bg-white/40 backdrop-blur-md p-6 rounded-lg border-l-4 border-[#0ea5e9]">
                 <h3 className="text-2xl font-bold mb-2 text-[#0d1b2a]">Answer FAQs</h3> 
-                <p className="text-[#4a5568]">Consistent replies with your tone, links, and route them where you want.</p>
+                <div className='grid gap-2'>
+                  <p className="text-[#4a5568]"><span className="font-bold">Creators:</span> Help your fans by answering their questions, access useful information, or create incentivized games with them in your DMs</p>
+                  <p className="text-[#4a5568]"><span className="font-bold">Businesses:</span> Help your customers identify the right service, make a reservation, RSVP to an event, or route to resources.</p>
+                </div>
               </div>
               <div className="bg-white/40 backdrop-blur-md p-6 rounded-lg border-l-4 border-[#0ea5e9]">
-                <h3 className="text-2xl font-bold mb-2 text-[#0d1b2a]">Set up dates for you</h3>
-                <p className="text-[#4a5568]">Got no game with the ladies? Your AI agent will get you so many dates with baddies you won&apos;t know what to do</p>
+                <h3 className="text-2xl font-bold mb-2 text-[#0d1b2a]">Attract (or scare) Dates</h3>
+                <p className="text-[#4a5568]">Got 0 luck with the huzz? Have AI message them for you.
+                Want to scare huzz that message you? Have AI roast them.</p>
               </div>
               <div className="bg-white/40 backdrop-blur-md p-6 rounded-lg border-l-4 border-[#0ea5e9]">
-                <h3 className="text-2xl font-bold mb-2 text-[#0d1b2a]">Have conversations with anyone!</h3>
-                <p className="text-[#4a5568]">Want to bully men in your DMs? Troll your friends? Invite people to a party/gathering? Have AI take care of all of it</p>
+                <h3 className="text-2xl font-bold mb-2 text-[#0d1b2a]">Have fun with your friends</h3>
+                <p className="text-[#4a5568]">Want to play a joke on your friends/family/colleagues ?
+                Have AI argue, instigate, roast, or tell them nice things to make their day!</p>
               </div>
             </div>
           </section>
@@ -303,11 +357,17 @@ export default function Home() {
                 <header className="mb-8">
                   <h3 className="text-2xl font-bold mb-4 text-[#0d1b2a]">Instagram DM AI Agent</h3>
                   <div className="flex flex-col items-center gap-2">
+                    <span className="text-4xl font-black text-black relative">
+                      <span className="line-through decoration-red-500 decoration-3">$19.99</span>
+                    </span>
                     <span className="text-4xl font-black text-black">Free</span>
-                    <span className="text-sm text-[#4a5568]">First 500 credits (~50 responses)</span>
+                    <span className="text-sm text-[#4a5568]">Limited time to early access users</span>
+                    {/* <span className="text-sm text-[#4a5568]">First 500 credits (~50 responses)</span> */}
                   </div>
                 </header>
                 <ul className="list-none my-8 text-left">
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">All early-access perks</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Commercial license to install for others</li>
                   <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Pay-by-usage</li>
                   <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">1 AI agent</li>
                   <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Prompt template</li>
@@ -361,77 +421,116 @@ export default function Home() {
 
             <div className="w-full md:w-8/10 m-auto">
               <form onSubmit={handleSubmit} className="grid gap-4">
-                <div className="grid gap-3">
-                  <Label htmlFor="full_name">Full Name <span className="text-red-500">*</span></Label>
-                  <Input 
-                    id="full_name" 
-                    name="full_name" 
-                    value={formData.full_name}
-                    onChange={(e) => handleInputChange('full_name', e.target.value)}
-                    required
-                  />
-                </div>
+                {/* Step 1 */}
+                {currentStep === 1 && (
+                  <>
+                    <div className="grid gap-3">
+                      <Label htmlFor="full_name">Full Name <span className="text-red-500">*</span></Label>
+                      <Input 
+                        id="full_name" 
+                        name="full_name" 
+                        value={formData.full_name}
+                        onChange={(e) => handleInputChange('full_name', e.target.value)}
+                        required
+                      />
+                    </div>
+                    
+                    <div className="grid gap-3">
+                      <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
+                      <Input 
+                        id="email" 
+                        name="email" 
+                        type="email" 
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        required 
+                      />
+                    </div>
                 
-                <div className="grid gap-3">
-                  <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
-                  <Input 
-                    id="email" 
-                    name="email" 
-                    type="email" 
-                    value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                    required 
-                  />
-                </div>
-            
-                <div className="grid gap-3">
-                  <Label htmlFor="instagram_username">Instagram username <span className="text-red-500">*</span></Label>
-                  <Input 
-                    id="instagram_username" 
-                    name="instagram_username" 
-                    placeholder="@ismaeljimenez.ai"
-                    value={formData.instagram_username}
-                    onChange={(e) => handleInputChange('instagram_username', e.target.value)}
-                    required
-                  />
-                </div>
+                    <div className="grid gap-3">
+                      <Label htmlFor="instagram_username">Instagram username <span className="text-red-500">*</span></Label>
+                      <Input 
+                        id="instagram_username" 
+                        name="instagram_username" 
+                        placeholder="@ismaeljimenez.ai"
+                        value={formData.instagram_username}
+                        onChange={(e) => handleInputChange('instagram_username', e.target.value)}
+                        required
+                      />
+                    </div>
 
-                <div className="grid gap-3">
-                  <Label htmlFor="interest_reason">What makes you interested in an AI appointment setter?</Label>
-                  <Textarea
-                    id="interest_reason" 
-                    name="interest_reason" 
-                    placeholder="Type your message here"
-                    value={formData.interest_reason}
-                    onChange={(e) => handleInputChange('interest_reason', e.target.value)}
-                  />
-                </div>
+                    <Button 
+                      type="button" 
+                      onClick={handleNext}
+                      disabled={!formData.full_name || !formData.email || !formData.instagram_username}
+                      className="w-full font-bold text-base h-auto bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black hover:from-emerald-300 hover:via-cyan-400 hover:to-sky-500"
+                    >
+                      Next
+                    </Button>
+                  </>
+                )}
 
-                <div className="grid gap-3">
-                  <Label htmlFor="planned_usage">What do you plan on using it for?</Label>
-                  <Textarea 
-                    id="planned_usage" 
-                    name="planned_usage" 
-                    placeholder="Type your message here"
-                    value={formData.planned_usage}
-                    onChange={(e) => handleInputChange('planned_usage', e.target.value)}
-                  />
-                </div>
+                {/* Step 2 */}
+                {currentStep === 2 && (
+                  <>
+                    <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <p className="text-blue-800 text-sm">
+                        <strong>Step 2 of 2:</strong> Almost there! Just a few more questions to help us understand your needs better.
+                      </p>
+                    </div>
 
-                <div className="grid gap-3">
-                  <Label htmlFor="business_instagram">Do you run a business and post content on Instagram?</Label>
-                  <Textarea 
-                    id="business_instagram" 
-                    name="business_instagram" 
-                    placeholder="Type your message here"
-                    value={formData.business_instagram}
-                    onChange={(e) => handleInputChange('business_instagram', e.target.value)}
-                  />
-                </div>
+                    <div className="grid gap-3">
+                      <Label htmlFor="interest_reason">What makes you interested in an AI appointment setter?</Label>
+                      <Textarea
+                        id="interest_reason" 
+                        name="interest_reason" 
+                        placeholder="Type your message here"
+                        value={formData.interest_reason}
+                        onChange={(e) => handleInputChange('interest_reason', e.target.value)}
+                      />
+                    </div>
 
-                <Button type="submit" className="w-full font-bold text-base h-auto" disabled={isSubmitting}>
-                  {isSubmitting ? 'Submitting...' : 'Submit'}
-                </Button>
+                    <div className="grid gap-3">
+                      <Label htmlFor="planned_usage">What do you plan on using it for?</Label>
+                      <Textarea 
+                        id="planned_usage" 
+                        name="planned_usage" 
+                        placeholder="Type your message here"
+                        value={formData.planned_usage}
+                        onChange={(e) => handleInputChange('planned_usage', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="grid gap-3">
+                      <Label htmlFor="business_instagram">Do you run a business and post content on Instagram?</Label>
+                      <Textarea 
+                        id="business_instagram" 
+                        name="business_instagram" 
+                        placeholder="Type your message here"
+                        value={formData.business_instagram}
+                        onChange={(e) => handleInputChange('business_instagram', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="flex gap-3">
+                      <Button 
+                        type="button" 
+                        onClick={handleBack}
+                        variant="outline"
+                        className="flex-1 font-bold text-base h-auto"
+                      >
+                        Back
+                      </Button>
+                      <Button 
+                        type="submit" 
+                        className="flex-1 font-bold text-base h-auto bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black hover:from-emerald-300 hover:via-cyan-400 hover:to-sky-500" 
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 'Submitting...' : 'Submit'}
+                      </Button>
+                    </div>
+                  </>
+                )}
 
                 {submitMessage && (
                   <div className={`text-center p-3 rounded-lg ${
@@ -448,7 +547,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="text-white py-12 mt-16  backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
+      <footer className="px-4 xl:px-0 text-white py-12 mt-16  backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
         <div className="max-w-[1100px] mx-auto">
           <div className="flex justify-between items-center flex-wrap gap-6  md:text-center">
             <p className="text-[#4a5568] text-sm">© <span id="year">{currentYear}</span> Fix AI LLC. All rights reserved.</p>
