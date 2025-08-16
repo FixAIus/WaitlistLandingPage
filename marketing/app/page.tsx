@@ -12,6 +12,16 @@ import { Button } from '@/components/ui/button';
 export default function Home() {
   const [currentYear, setCurrentYear] = useState('');
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    full_name: '',
+    email: '',
+    instagram_username: '',
+    interest_reason: '',
+    planned_usage: '',
+    business_instagram: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear().toString());
@@ -33,6 +43,49 @@ export default function Home() {
       });
     }
     setIsNavOpen(false);
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitMessage('Success! You\'ve been added to the waitlist.');
+        setFormData({
+          full_name: '',
+          email: '',
+          instagram_username: '',
+          interest_reason: '',
+          planned_usage: '',
+          business_instagram: ''
+        });
+      } else {
+        const errorData = await response.json();
+        setSubmitMessage(`Error: ${errorData.error || 'Something went wrong'}`);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitMessage('Error: Failed to submit form');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -77,7 +130,7 @@ export default function Home() {
       /> */}
 
       <header className="fixed top-0 left-0 right-0 z-[1000] backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
-        <div className="max-w-[1100px] mx-auto px-6">
+        <div className="max-w-[1100px] mx-auto">
           <div className="flex items-center justify-between py-[18px]">
             <div className="flex items-center gap-3">
               <Image 
@@ -100,27 +153,27 @@ export default function Home() {
                 <span className="w-[25px] h-[3px] bg-[#0d1b2a] mb-[2px] transition-all duration-300"></span>
                 <span className="w-[25px] h-[3px] bg-[#0d1b2a] transition-all duration-300"></span>
               </button>
-              <div className={`md:flex items-center gap-8 ${isNavOpen ? 'absolute top-full left-0 right-0 bg-white/98 backdrop-blur-md flex-col p-6 border-b border-black/10 shadow-lg md:static md:bg-transparent md:border-none md:shadow-none md:p-0' : 'hidden'}`}>
+              <div className={`md:flex items-center gap-2 ${isNavOpen ? 'absolute top-full left-0 right-0 bg-white/98 backdrop-blur-md flex-col p-6 border-b border-black/10 shadow-lg md:static md:bg-transparent md:border-none md:shadow-none md:p-0' : 'hidden'}`}>
                 <button 
-                  className="bg-transparent font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
+                  className="bg-transparent font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 md:py-2 md:px-4 hover:text-[#0ea5e9] md:bg-white/50 rounded-xl md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
                   onClick={() => scrollToSection('installation')}
                 >
                   Installation
                 </button>
                 <button 
-                  className="bg-transparent font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
+                  className="bg-transparent font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 md:py-2 md:px-4 hover:text-[#0ea5e9] md:bg-white/50 rounded-xl md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
                   onClick={() => scrollToSection('usecases')}
                 >
                   Use cases
                 </button>
                 <button 
-                  className="bg-white font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
+                  className="bg-transparent font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:py-2 md:px-4 hover:text-[#0ea5e9] md:bg-white/50 rounded-xl md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
                   onClick={() => scrollToSection('pricing')}
                 >
                   Pricing
                 </button>
                 <button 
-                  className="cursor-pointer inline-flex underline underline-offset-2 items-center justify-center px-5 py-3 bg-[#0ea5e9] text-black font-bold text-lg rounded-xl transition-all duration-300 hover:bg-[#0e85d9] hover:-translate-y-0.5 hover:shadow-lg mt-4 md:mt-0 md:w-auto md:justify-center" 
+                  className="cursor-pointer inline-flex underline underline-offset-2 items-center justify-center px-5 py-3 bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black font-bold text-xl rounded-xl transition-all duration-300 hover:from-emerald-300 hover:via-cyan-400 hover:to-sky-500 hover:-translate-y-0.5 hover:shadow-lg mt-4 md:mt-0 md:w-auto md:justify-center" 
                   onClick={() => scrollToSection('survey')}
                 >
                   GET YOURS NOW
@@ -131,7 +184,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="max-w-[1100px] mx-auto px-6 pt-[80px] pb-12">
+      <main className="max-w-[1100px] mx-auto pt-[80px] pb-12">
         {/* Home / VSL */}
         <section id="home" className="tab-panel active" role="tabpanel" aria-labelledby="home-tab">
           <div className="text-center py-8">
@@ -262,7 +315,7 @@ export default function Home() {
                   <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">1 Campaign</li>
                 </ul>
                 <button 
-                  className="inline-flex items-center justify-center px-6 py-3 bg-[#0ea5e9] text-white font-semibold text-base rounded-lg transition-all duration-300 hover:bg-[#0284c7] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
+                  className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black font-bold text-lg rounded-lg transition-all duration-300 hover:bg-[#0284c7] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
                   onClick={() => scrollToSection('survey')}
                 >
                   Get started
@@ -284,7 +337,7 @@ export default function Home() {
                   <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Multiple campaigns</li>
                 </ul>
                 <a 
-                  className="inline-flex items-center justify-center px-6 py-3 bg-[#0d1b2a] text-white font-semibold text-base rounded-lg transition-all duration-300 hover:bg-[#1e293b] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[#0d1b2a] text-white font-bold text-lg rounded-lg transition-all duration-300 hover:bg-[#1e293b] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
                   href="https://api.leadconnectorhq.com/widget/bookings/fixai-strategy-consultation" 
                   target="_blank" 
                   rel="noopener"
@@ -307,15 +360,14 @@ export default function Home() {
             ></iframe> */}
 
             <div className="w-full md:w-8/10 m-auto">
-
-              <div className="grid gap-4">
+              <form onSubmit={handleSubmit} className="grid gap-4">
                 <div className="grid gap-3">
                   <Label htmlFor="full_name">Full Name <span className="text-red-500">*</span></Label>
                   <Input 
                     id="full_name" 
                     name="full_name" 
-                    // value={formData.full_name}
-                    // onChange={(e) => handleInputChange('full_name', e.target.value)}
+                    value={formData.full_name}
+                    onChange={(e) => handleInputChange('full_name', e.target.value)}
                     required
                   />
                 </div>
@@ -326,8 +378,8 @@ export default function Home() {
                     id="email" 
                     name="email" 
                     type="email" 
-                    // value={formData.email}
-                    // onChange={(e) => handleInputChange('email', e.target.value)}
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
                     required 
                   />
                 </div>
@@ -338,8 +390,9 @@ export default function Home() {
                     id="instagram_username" 
                     name="instagram_username" 
                     placeholder="@ismaeljimenez.ai"
-                    // value={formData.instagram_username}
-                    // onChange={(e) => handleInputChange('instagram_username', e.target.value)}
+                    value={formData.instagram_username}
+                    onChange={(e) => handleInputChange('instagram_username', e.target.value)}
+                    required
                   />
                 </div>
 
@@ -349,8 +402,8 @@ export default function Home() {
                     id="interest_reason" 
                     name="interest_reason" 
                     placeholder="Type your message here"
-                    // value={formData.interest_reason}
-                    // onChange={(e) => handleInputChange('interest_reason', e.target.value)}
+                    value={formData.interest_reason}
+                    onChange={(e) => handleInputChange('interest_reason', e.target.value)}
                   />
                 </div>
 
@@ -360,8 +413,8 @@ export default function Home() {
                     id="planned_usage" 
                     name="planned_usage" 
                     placeholder="Type your message here"
-                    // value={formData.planned_usage}
-                    // onChange={(e) => handleInputChange('planned_usage', e.target.value)}
+                    value={formData.planned_usage}
+                    onChange={(e) => handleInputChange('planned_usage', e.target.value)}
                   />
                 </div>
 
@@ -371,20 +424,32 @@ export default function Home() {
                     id="business_instagram" 
                     name="business_instagram" 
                     placeholder="Type your message here"
-                    // value={formData.business_instagram}
-                    // onChange={(e) => handleInputChange('business_instagram', e.target.value)}
+                    value={formData.business_instagram}
+                    onChange={(e) => handleInputChange('business_instagram', e.target.value)}
                   />
                 </div>
 
-                <Button className="w-full">Submit</Button>
-              </div>
+                <Button type="submit" className="w-full font-bold text-base h-auto" disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
+                </Button>
+
+                {submitMessage && (
+                  <div className={`text-center p-3 rounded-lg ${
+                    submitMessage.includes('Success') 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {submitMessage}
+                  </div>
+                )}
+              </form>
             </div>
           </div>
         </section>
       </main>
 
       <footer className="text-white py-12 mt-16  backdrop-blur-md bg-gradient-to-r from-[color-mix(in_srgb,#ffd6c0,white_20%)] to-[color-mix(in_srgb,#b6f3e6,white_20%)] border-b border-[rgba(13,27,42,0.08)]">
-        <div className="max-w-[1100px] mx-auto px-6">
+        <div className="max-w-[1100px] mx-auto">
           <div className="flex justify-between items-center flex-wrap gap-6  md:text-center">
             <p className="text-[#4a5568] text-sm">© <span id="year">{currentYear}</span> Fix AI LLC. All rights reserved.</p>
             <div className="flex gap-6">
