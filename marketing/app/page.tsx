@@ -6,6 +6,7 @@ import React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 
 
 export default function Home() {
@@ -19,7 +20,17 @@ export default function Home() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Use getBoundingClientRect for more accurate positioning
+      const rect = element.getBoundingClientRect();
+      const headerHeight = 80;
+      const additionalOffset = 20;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const targetPosition = scrollTop + rect.top - headerHeight - additionalOffset;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
     }
     setIsNavOpen(false);
   };
@@ -71,7 +82,7 @@ export default function Home() {
             <div className="flex items-center gap-3">
               <Image 
                 className="w-[52px] h-[52px] rounded-[14px] block object-cover" 
-                src="/favicon.png" 
+                src="/favicon.ico" 
                 alt="Fix AI logo" 
                 width={52}
                 height={52}
@@ -91,25 +102,25 @@ export default function Home() {
               </button>
               <div className={`md:flex items-center gap-8 ${isNavOpen ? 'absolute top-full left-0 right-0 bg-white/98 backdrop-blur-md flex-col p-6 border-b border-black/10 shadow-lg md:static md:bg-transparent md:border-none md:shadow-none md:p-0' : 'hidden'}`}>
                 <button 
-                  className="bg-transparent font-semibold border-none font-['Inter'] text-base text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
+                  className="bg-transparent font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
                   onClick={() => scrollToSection('installation')}
                 >
                   Installation
                 </button>
                 <button 
-                  className="bg-transparent font-semibold border-none font-['Inter'] text-base text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
+                  className="bg-transparent font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
                   onClick={() => scrollToSection('usecases')}
                 >
                   Use cases
                 </button>
                 <button 
-                  className="bg-transparent font-semibold border-none font-['Inter'] text-base text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
+                  className="bg-white font-bold border-none font-['Inter'] text-lg text-[#0d1b2a] cursor-pointer transition-colors duration-300 p-4 md:p-2 hover:text-[#0ea5e9] md:bg-transparent md:w-auto md:text-left md:border-b md:border-black/10 md:last:border-b-0 md:border-none" 
                   onClick={() => scrollToSection('pricing')}
                 >
                   Pricing
                 </button>
                 <button 
-                  className="inline-flex underline underline-offset-2 items-center justify-center px-4 py-2 bg-[#0ea5e9] text-black font-semibold text-base rounded-lg transition-all duration-300 hover:bg-yellow-400 hover:-translate-y-0.5 hover:shadow-lg mt-4 md:mt-0 md:w-auto md:justify-center" 
+                  className="cursor-pointer inline-flex underline underline-offset-2 items-center justify-center px-5 py-3 bg-[#0ea5e9] text-black font-bold text-lg rounded-xl transition-all duration-300 hover:bg-[#0e85d9] hover:-translate-y-0.5 hover:shadow-lg mt-4 md:mt-0 md:w-auto md:justify-center" 
                   onClick={() => scrollToSection('survey')}
                 >
                   GET YOURS NOW
@@ -123,9 +134,9 @@ export default function Home() {
       <main className="max-w-[1100px] mx-auto px-6 pt-[80px] pb-12">
         {/* Home / VSL */}
         <section id="home" className="tab-panel active" role="tabpanel" aria-labelledby="home-tab">
-          <div className="text-center py-16">
-            <h1 className="text-5xl md:text-6xl sm:text-3xl mb-4 bg-gradient-to-r from-[#0ea5e9] font-['Space_Grotesk'] font-bold to-[#a78bfa] bg-clip-text text-neutral-900">AI that rizzes up your leads</h1>
-            <p className="text-2xl md:text-2xl text-[#4a5568] mb-12 font-semibold">Instagram DM AI agent</p>
+          <div className="text-center py-8">
+            <h1 className="text-5xl md:text-7xl mb-4 bg-gradient-to-r from-[#0ea5e9] font-['Space_Grotesk'] font-bold to-[#a78bfa] bg-clip-text tracking-tight text-neutral-900">AI that rizzes up your leads</h1>
+            <p className="text-2xl md:text-2xl text-[#4a5568] mb-4 font-semibold">Instagram DM AI agent</p>
 
             <div className="flex justify-center gap-6 flex-wrap">
               <button 
@@ -138,7 +149,7 @@ export default function Home() {
           </div>
 
           {/* Metrics image + Booked call GIF */}
-          <div id="media" className="bg-white/40 backdrop-blur-md rounded-2xl p-12 my-6 shadow-lg border border-[rgba(13,27,42,0.08)]">
+          <div id="media" className="bg-white/40 backdrop-blur-md rounded-2xl p-12 my-4 shadow-lg border border-[rgba(13,27,42,0.08)]">
             <h2 className="text-center text-4xl md:text-3xl font-bold mb-8 text-[#0d1b2a]">See the results</h2>
             <div className="grid grid-cols-1 gap-8 my-8 md:grid-cols-2">
               <figure className="relative">
@@ -297,72 +308,77 @@ export default function Home() {
 
             <div className="w-full md:w-8/10 m-auto">
 
-            <div className="grid gap-4">
-            <div className="grid gap-3">
-              <Label htmlFor="full_name">Full Name</Label>
-              <Input 
-                id="full_name" 
-                name="full_name" 
-                // value={formData.full_name}
-                // onChange={(e) => handleInputChange('full_name', e.target.value)}
-                required
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="email">Email</Label>
-              <Input 
-                id="email" 
-                name="email" 
-                type="email" 
-                // value={formData.email}
-                // onChange={(e) => handleInputChange('email', e.target.value)}
-                required 
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="instagram_username">Instagram username</Label>
-              <Input 
-                id="instagram_username" 
-                name="instagram_username" 
-                placeholder="@ismaeljimenez.ai"
-                // value={formData.instagram_username}
-                // onChange={(e) => handleInputChange('instagram_username', e.target.value)}
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="interest_reason">What makes you interested in an AI appointment setter?</Label>
-              <Textarea
-                id="interest_reason" 
-                name="interest_reason" 
-                placeholder="Type your message here"
-                // value={formData.interest_reason}
-                // onChange={(e) => handleInputChange('interest_reason', e.target.value)}
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="planned_usage">What do you plan on using it for?</Label>
-              <Textarea 
-                id="planned_usage" 
-                name="planned_usage" 
-                placeholder="Type your message here"
-                // value={formData.planned_usage}
-                // onChange={(e) => handleInputChange('planned_usage', e.target.value)}
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="business_instagram">Do you run a business and post content on Instagram?</Label>
-              <Textarea 
-                id="business_instagram" 
-                name="business_instagram" 
-                placeholder="Type your message here"
-                // value={formData.business_instagram}
-                // onChange={(e) => handleInputChange('business_instagram', e.target.value)}
-              />
-            </div>
-          </div>
+              <div className="grid gap-4">
+                <div className="grid gap-3">
+                  <Label htmlFor="full_name">Full Name <span className="text-red-500">*</span></Label>
+                  <Input 
+                    id="full_name" 
+                    name="full_name" 
+                    // value={formData.full_name}
+                    // onChange={(e) => handleInputChange('full_name', e.target.value)}
+                    required
+                  />
+                </div>
+                
+                <div className="grid gap-3">
+                  <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
+                  <Input 
+                    id="email" 
+                    name="email" 
+                    type="email" 
+                    // value={formData.email}
+                    // onChange={(e) => handleInputChange('email', e.target.value)}
+                    required 
+                  />
+                </div>
+            
+                <div className="grid gap-3">
+                  <Label htmlFor="instagram_username">Instagram username <span className="text-red-500">*</span></Label>
+                  <Input 
+                    id="instagram_username" 
+                    name="instagram_username" 
+                    placeholder="@ismaeljimenez.ai"
+                    // value={formData.instagram_username}
+                    // onChange={(e) => handleInputChange('instagram_username', e.target.value)}
+                  />
+                </div>
 
-            </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="interest_reason">What makes you interested in an AI appointment setter?</Label>
+                  <Textarea
+                    id="interest_reason" 
+                    name="interest_reason" 
+                    placeholder="Type your message here"
+                    // value={formData.interest_reason}
+                    // onChange={(e) => handleInputChange('interest_reason', e.target.value)}
+                  />
+                </div>
 
+                <div className="grid gap-3">
+                  <Label htmlFor="planned_usage">What do you plan on using it for?</Label>
+                  <Textarea 
+                    id="planned_usage" 
+                    name="planned_usage" 
+                    placeholder="Type your message here"
+                    // value={formData.planned_usage}
+                    // onChange={(e) => handleInputChange('planned_usage', e.target.value)}
+                  />
+                </div>
+
+                <div className="grid gap-3">
+                  <Label htmlFor="business_instagram">Do you run a business and post content on Instagram?</Label>
+                  <Textarea 
+                    id="business_instagram" 
+                    name="business_instagram" 
+                    placeholder="Type your message here"
+                    // value={formData.business_instagram}
+                    // onChange={(e) => handleInputChange('business_instagram', e.target.value)}
+                  />
+                </div>
+
+                <Button className="w-full">Submit</Button>
+              </div>
+            </div>
           </div>
         </section>
       </main>
@@ -378,13 +394,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-      `}</style>
     </>
   );
 }
