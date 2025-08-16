@@ -381,13 +381,13 @@ export default function Home() {
                   </div>
                 </header>
                 <ul className="list-none my-8 text-left">
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">All early-access perks</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Commercial license to install for others</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Pay-by-usage</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">1 AI agent</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Prompt template</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">KPI dashboard</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">1 Campaign</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">All early-access perks</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">Commercial license to install for others</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">Pay-by-usage</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">1 AI agent</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">Prompt template</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">KPI dashboard</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">1 Campaign</li>
                 </ul>
                 <button 
                   className="cursor-pointer inline-flex items-center justify-center px-6 py-3 bg-gradient-to-br from-emerald-200 via-cyan-300 to-sky-400 text-black font-bold text-lg rounded-lg transition-all duration-300 hover:bg-[#0284c7] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
@@ -405,11 +405,11 @@ export default function Home() {
                   </div>
                 </header>
                 <ul className="list-none my-8 text-left">
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Setup Cost + Monthly Fee</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Multi-agent Appointment Setter</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Custom KPI + Analytics Dashboard </li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">1:1 support</li>
-                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#f472b6] before:font-bold">Multiple campaigns</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">Setup Cost + Monthly Fee</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">Multi-agent Appointment Setter</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">Custom KPI + Analytics Dashboard </li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">1:1 support</li>
+                  <li className="py-1 relative pl-6 before:content-['✓'] before:absolute before:left-0 before:text-[#10b981] before:font-bold">Multiple campaigns</li>
                 </ul>
                 <a 
                   className="inline-flex items-center justify-center px-6 py-3 bg-[#0d1b2a] text-white font-bold text-lg rounded-lg transition-all duration-300 hover:bg-[#1e293b] hover:-translate-y-0.5 hover:shadow-lg w-full mt-6" 
