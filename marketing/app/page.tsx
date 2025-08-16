@@ -298,7 +298,7 @@ export default function Home() {
           <div className="bg-white/70 backdrop-blur-md rounded-2xl p-12 my-12 shadow-lg border border-[rgba(13,27,42,0.08)]">
             <h2 id="early-access" className="text-center text-4xl md:text-3xl font-bold mb-8 text-[#0d1b2a]">Early Access Perks</h2>
             <ul className="list-none my-8">
-                <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>First 500 messages free ($50) value</strong></li>
+                <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>First 500 messages</strong></li>
                <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>Priority support for 6 months</strong></li>
                <li className="mb-6 pl-8 relative text-lg before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[#0ea5e9] before:text-white before:w-3 before:h-3 before:rounded-full before:flex before:items-center before:justify-center before:text-xs before:font-semibold"><strong>Access to newest use-case templates</strong></li>
             </ul>
