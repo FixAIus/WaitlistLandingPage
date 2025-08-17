@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Waitlist {
-  id                 String    @id @default(uuid())
+  id                 String       @id @default(uuid())
   clerk_id           String?   @unique
   email              String    @unique
   first_name         String?
@@ -26,13 +26,13 @@ model Waitlist {
 }
 
 model Clients {
-  id                String   @id
-  clerk_id          String?  @unique
-  createdAt         DateTime @default(now())
-  email             String   @unique
+  id                 String    @id @default(uuid())
+  clerk_id          String?     @unique
+  createdAt         DateTime    @default(now())
+  email             String      @unique
   first_name        String?
   full_name         String?
   last_name         String?
   profile_image_url String?
-  updatedAt         DateTime
+  updatedAt          DateTime         @updatedAt
 }
