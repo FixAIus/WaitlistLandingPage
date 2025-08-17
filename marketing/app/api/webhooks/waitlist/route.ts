@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { verifyWebhook, WebhookEvent } from '@clerk/nextjs/webhooks'
 
-async function handleUserCreated(evt: WebhookEvent) {
+async function handleUpdatedWaitlistEntry(evt: WebhookEvent) {
   try {
     console.log('Processing user created:', evt.data);
     
@@ -24,15 +24,14 @@ async function handleUserCreated(evt: WebhookEvent) {
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('Webhook endpoint hit - processing request...');
+    console.debug('Webhook endpoint hit - processing request...');
     
     const evt: WebhookEvent = await verifyWebhook(request);
     console.log('Webhook verified successfully. Event type:', evt.type);
-    console.log('Event data:', JSON.stringify(evt.data, null, 2));
 
     switch (evt.type) {
-      case 'user.created':
-        await handleUserCreated(evt);
+      case 'waitlistEntry.updated':
+        await handleUpdatedWaitlistEntry(evt);
         break;
       case 'user.updated':
         console.log('User updated:', evt.data);
@@ -42,9 +41,6 @@ export async function POST(request: NextRequest) {
         break;
       case 'email.created':
         console.log('Email created/sent:', evt.data);
-        break;
-      case 'sms.created':
-        console.log('SMS created/sent:', evt.data);
         break;
       default:
         console.log('Unhandled webhook type:', evt.type);
