@@ -10,6 +10,9 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    ignorePatterns: ["postcss.config.js"]
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
