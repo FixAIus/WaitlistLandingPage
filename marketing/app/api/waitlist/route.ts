@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../lib/generated/prisma';
+import { PrismaClient } from '@/lib/generated/prisma';
+import { createClerkClient } from '@clerk/backend'
+
 
 const prisma = new PrismaClient();
+const clerkClient = createClerkClient({
+  secretKey: process.env.CLERK_SECRET_KEY,
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -38,24 +43,11 @@ export async function POST(request: NextRequest) {
     // Create Clerk user
     let clerkUserId = null;
     try {
-      const clerkResponse = await fetch('https://api.clerk.com/v1/waitlist_entries', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.CLERK_SECRET_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email_address: email,
-          notify: true
-        }),
+      const clerkUser = await clerkClient.waitlistEntries.create({
+        emailAddress: email,
+        notify: true
       });
-
-      if (clerkResponse.ok) {
-        const clerkUser = await clerkResponse.json();
-        clerkUserId = clerkUser.id;
-      } else {
-        console.warn('Failed to create Clerk user:', await clerkResponse.text());
-      }
+      clerkUserId = clerkUser.id;
     } catch (clerkError) {
       console.warn('Error creating Clerk user:', clerkError);
     }
@@ -69,7 +61,8 @@ export async function POST(request: NextRequest) {
         instagram_username,
         interest_reason,
         planned_usage,
-        business_instagram
+        business_instagram,
+        status: 'pending'
       }
     });
 
