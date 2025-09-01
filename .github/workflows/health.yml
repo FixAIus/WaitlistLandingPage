@@ -1,0 +1,21 @@
+name: Health Check
+on:
+  schedule:
+    - cron: '0 9,21 * * *'  # Twice a day at 9 AM and 9 PM UTC
+
+jobs:
+  health-check-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Production Health Endpoint
+        run: |
+          curl -f https://app.workwithfixai.com/api/health
+          echo "Production health check completed at $(date)"
+
+  health-check-development:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Development Health Endpoint
+        run: |
+          curl -f https://development-waitlistlandingpage-new-app.up.railway.app/api/health
+          echo "Development health check completed at $(date)"
