@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingEntry) {
+      console.info('Email already exists in waitlist:', existingEntry);
       return NextResponse.json(
         { error: 'This email is already on the waitlist' },
         { status: 409 }
@@ -65,6 +66,8 @@ export async function POST(request: NextRequest) {
         status: 'pending'
       }
     });
+
+    console.info('Waitlist entry created:', waitlistEntry);
 
     return NextResponse.json(
       { 
