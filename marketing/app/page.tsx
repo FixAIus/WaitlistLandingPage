@@ -223,39 +223,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Metrics image + Booked call GIF */}
-          <div id="media" className="bg-white/40 backdrop-blur-md rounded-2xl p-12 my-4 shadow-lg border border-[rgba(13,27,42,0.08)]">
-            <h2 className="text-center text-4xl md:text-3xl font-bold mb-8 text-[#0d1b2a]">See the results</h2>
-            <div className="grid grid-cols-1 gap-8 my-8 md:grid-cols-2">
-              <figure className="relative">
-                <Image 
-                  className="w-full h-auto rounded-lg shadow-lg aspect-video object-cover" 
-                  id="metricsImage" 
-                  alt="Metrics dashboard" 
-                  loading="lazy" 
-                  decoding="async" 
-                  src="/assets/metrics-preview.png"
-                  width={800}
-                  height={450}
-                />
-                <figcaption className="text-center mt-2 text-sm text-[#4a5568]">KPI Dashboard</figcaption>
-              </figure>
-              <figure className="relative">
-                <Image 
-                  className="w-full h-auto rounded-lg shadow-lg aspect-[4/5] object-cover" 
-                  id="bookingGif" 
-                  alt="Call being booked automatically" 
-                  loading="lazy" 
-                  decoding="async" 
-                  src="/assets/booked-call.gif"
-                  width={400}
-                  height={533}
-                />
-                <figcaption className="text-center mt-2 text-sm text-[#4a5568]">Booked call demo</figcaption>
-              </figure>
-            </div>
-          </div>
-
           <div className="bg-white/70 backdrop-blur-md rounded-2xl p-12 my-12 shadow-lg border border-[rgba(13,27,42,0.08)]">
             <h2 id="installation" className="text-center text-4xl md:text-3xl font-bold mb-8 text-[#0d1b2a]">Install in under 5 minutes!</h2>
             <ol className="list-none my-8">
